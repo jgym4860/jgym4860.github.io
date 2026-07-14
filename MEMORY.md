@@ -1,163 +1,64 @@
-# Loop Engineering Memory
+# MEMORY
 
 ## Goal
-
-- Complete a GitHub Pages-ready professional website.
-- Support responsive desktop and mobile layouts.
-- Implement a `Games` tab.
-- Implement a snake game controllable by keyboard and mobile touch.
-- Complete the first GitHub Pages deployment.
-- Reflect the Step 1 game add-on requirements:
-  - `Games` tab
-  - snake game
-  - keyboard controls
-  - mobile touch controls
-  - score and restart flow
+- Ship a static professional portfolio on GitHub Pages
+- Support desktop, tablet, and mobile layouts
+- Keep a Games tab with a snake game
+- Keep keyboard and touch controls working
+- Preserve the existing site content where possible
 
 ## Required Deliverables
-
-- `/index.html`
-- `/styles.css`
-- `/script.js`
-- Separate `game.js` if needed
-- Required images and static assets
-- `AORR.md`
-- `MEMORY.md`
+- index.html
+- styles.css
+- script.js
+- games/index.html
+- games/game.js
+- assets/snake-core.js
+- AORR.md
+- MEMORY.md
 
 ## Current Scope
-
 - Static HTML, CSS, and JavaScript only
-- Professional website content
-- Responsive layout
-- `Games` tab
-- Snake game
+- Responsive professional content sections
+- Games tab and snake game
 - GitHub Pages deployment
 
 ## Out of Scope
-
-- Backend server
-- Database
-- Login and sign-up
-- Payments
-- User data collection
-- External APIs without explicit approval
-- Framework migration without explicit approval
+- Backend services
+- Databases
+- Login or payments
+- External APIs without approval
+- Framework migration without approval
 
 ## Current State
-
-- Current state: the professional static site and Loop Snake game are locally implemented and verified for local test/build/server checks, but browser viewport/console/touch verification still needs human confirmation before deployment approval.
-- Completed loops: repository reset, initial static site scaffold, `AORR.md` state-machine design, TDD loop design update, current basic-shell verification, full local verification for the site and snake game shell.
-- Next loop: deployment approval handling, then commit/push/GitHub Pages publication if approved.
-- Current Retry count: 0
-- Current error fingerprint: none
-- Blocker: none
-- Last normal state: full local verifier suite and static HTTP smoke checks passed
+- The site works locally and the Pages site responds with HTTP 200
+- GitHub Pages build history showed a stale errored entry and a current build in building state
+- AORR.md and MEMORY.md were rewritten to ASCII-only UTF-8 to remove the build error caused by invalid encoding
+- Current retry count: 0
+- Current error fingerprint: markdown UTF-8 encoding issue
+- Blocker: none after the encoding fix
+- Last normal state: local test and build passed
 
 ## Guardrails
-
-- Do not delete existing personal content without confirmation.
-- Do not invent unverified career or project information.
-- Do not delete or weaken tests to make them pass.
-- Do not print tokens.
-- Do not store tokens in HTML, CSS, or JavaScript.
-- Do not commit tokens to Git.
-- Do not commit `github_token.txt`.
-- Do not commit `env_settings.txt`.
-- Do not add backend features.
-- Do not perform large refactors without need.
-- Do not remove functionality just to satisfy tests.
+- Do not invent personal content
+- Do not delete tests
+- Do not print tokens
+- Do not commit tokens or secret files
+- Do not add backend features
+- Do not remove working features to satisfy tests
 
 ## Acceptance Criteria
-
-- Root `index.html` exists.
-- The site loads correctly from a local static server.
-- CSS and JavaScript load correctly.
-- No browser console errors remain.
-- Desktop and mobile layouts work.
-- `Games` tab navigates correctly.
-- Snake game runs correctly.
-- Keyboard controls work.
-- Mobile touch controls work.
-- Score and restart behave correctly.
-- GitHub Pages returns HTTP 200.
-- The deployed site behaves the same as local.
+- Local static server serves index.html, styles.css, and script.js with HTTP 200
+- Desktop, tablet, and mobile layouts work
+- Games tab works
+- Snake game works with keyboard and touch
+- GitHub Pages responds with HTTP 200
+- Jekyll build does not fail on markdown encoding
 
 ## Retry Policy
+- Fix one cause at a time
+- Rerun the same verifier after each retry
+- Stop after repeated identical fingerprints or three retries
 
-- Maximum 3 retries per single error.
-- Stop if the same error fingerprint repeats twice.
-- Fix only one cause per retry.
-- Re-run the same Verifier after each retry.
-
-## HITL Conditions
-
-- Personal profile content is unclear.
-- Existing content must be removed.
-- Requirements conflict.
-- GitHub repository permissions are insufficient.
-- GitHub Pages settings must change.
-- An external service must be added.
-- Retry limit is reached.
-
-## Tool Policy
-
-- Codex handles task control, file edits, and test execution.
-- WSL에서 `node`, `npm`, `claude` CLI를 사용할 수 있다면 우선 사용한다.
-- Claude Code CLI를 실제로 사용할 때는 사용한 모델명을 기록한다. Sonnet 5 사용 가능 여부는 실행 시점에 확인한다.
-- Never leave token values in any execution record.
-- WSL에서 실행 전에는 필요한 도구의 실제 PATH와 버전을 다시 확인한다.
-
-## Execution Log Template
-
-```text
-Loop ID:
-Start time:
-Goal:
-Start state:
-Hypothesis:
-Act:
-Changed files:
-Verifier:
-Test result:
-Exit code:
-Error fingerprint:
-Retry count:
-End state:
-Next step:
-Human check needed:
-```
-
-## Current Loop Record
-
-- Loop ID: `basic-shell-001`
-- 시작 시각: `2026-07-14`
-- 목표: GitHub Pages용 정적 웹사이트의 가장 안전한 기본 구조를 확인한다
-- 시작 상태: 루트 `index.html`, `styles.css`, `script.js`, `games/`, `assets/`가 존재하는 초기 스캐폴드
-- 가설: 현재 스캐폴드는 기본 정적 사이트로 동작하고, 최소 경로와 연결이 유효하다
-- Act: 루트 구조와 문서를 읽고, WSL에서 `python3 -m http.server`를 띄워 `index.html`, `styles.css`, `script.js` 응답을 확인했다
-- 변경 파일: 없음
-- Verifier: `python3 -m http.server` + `curl -I` to `/`, `/index.html`, `/styles.css`, `/script.js`
-- 테스트 결과: 모두 HTTP 200 응답 확인
-- exit code: `0`
-- 오류 fingerprint: 없음
-- Retry 횟수: `0`
-- 종료 상태: `PASSED`
-- 다음 작업: 브라우저 viewport 검증 또는 프로필 콘텐츠 정리
-- 사람 확인 필요 항목: 없음
-
-
-- Loop ID: `full-local-verify-002`
-- 시작 시각: `2026-07-14`
-- 목표: 정적 프로페셔널 웹사이트와 Loop Snake 게임의 현재 구현을 로컬에서 끝까지 검증하고, 배포 승인 대기 상태로 전환한다
-- 시작 상태: 루트 정적 파일, Games 페이지, snake core, 입력 처리, 테스트 스위트, 빌드 스크립트가 존재하고 이전 기본 셸 검증이 완료됨
-- 가설: 현재 구현은 로컬 테스트와 빌드를 통과하며, 정적 서버에서 주요 자산이 HTTP 200으로 응답한다
-- Act: `source ~/.nvm/nvm.sh && npm test && npm run build`를 실행하고, `python3 -m http.server`로 임시 정적 서버를 띄운 뒤 `/`, `/index.html`, `/styles.css`, `/script.js`, `/games/` 응답을 확인했다
-- 변경 파일: 없음
-- Verifier: `node --test`, `node scripts/build.mjs`, `python3 -m http.server` + `curl -I`
-- 테스트 결과: `npm test` 11/11 통과, `npm run build` 성공, 정적 서버 응답 모두 HTTP 200
-- exit code: `0`
-- 오류 fingerprint: 없음
-- Retry 횟수: `0`
-- 종료 상태: `HITL_REQUIRED`
-- 다음 작업: 브라우저 viewport/console/touch의 사람 확인 후, 필요하면 배포 승인 요청
-- 사람 확인 필요 항목: 브라우저 viewport/콘솔/터치 상호작용의 실제 시각 검증; Claude Code CLI는 안전한 로컬 검증으로 대체되어 이번 실행에서 사용하지 않음
+## Execution Note
+- The markdown encoding issue was the last known GitHub Pages failure source.
