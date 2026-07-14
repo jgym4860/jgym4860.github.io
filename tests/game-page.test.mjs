@@ -23,5 +23,9 @@ test("games page exposes accessible snake and tetris controls", async () => {
   for (const action of ["left", "rotate", "right", "down", "hard-drop"]) {
     assert.match(page, new RegExp(`data-tetris-action=["']${action}["']`, "i"));
   }
+  assert.match(page, /Tetris keyboard mapping/i);
+  for (const key of ["Left", "Right", "Up", "Down", "Space"]) {
+    assert.match(page, new RegExp(`<kbd>${key}<\\/kbd>`, "i"));
+  }
   assert.match(page, /<script\s+type=["']module["']\s+src=["']\.\/tetris\.js["']/i);
 });

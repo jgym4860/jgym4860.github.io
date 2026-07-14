@@ -48,3 +48,18 @@ Rewrite the markdown files as ASCII-only UTF-8 and rerun local verification, the
 - Retry count: 1
 - Error fingerprint: `TEST:tetris-boundary-reused-initial-state`
 - Human check needed: browser visual and touch interaction confirmation
+
+
+## Change Loop: Loop Engineering and Tetris Mapping
+- Loop ID: `change-request-loop-engineering-002`
+- Change Items: `main screen composition`, `Tetris keyboard mapping`
+- State transition: READY -> ACTING -> VERIFYING -> RETRYING -> VERIFYING -> PASSED
+- Hypothesis: the requested explanation and controls can be added as focused content and guidance without changing game rules
+- Act: updated the main screen with Loop Engineering content and one-day delivery context; added visible Tetris key mapping and responsive key styles; extended page tests
+- Observe: 15 tests passed and build passed; first diff check found one trailing blank line in CHANGE_REQUEST.md
+- Reason: TEST
+- Repeat: removed only the trailing blank line and reran the same verifier
+- Final result: 15 tests passed, build passed, diff check passed
+- Retry count: 1
+- Error fingerprint: `TEST:change-request-trailing-blank-line`
+- Human check needed: browser visual and keyboard confirmation

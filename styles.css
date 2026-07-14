@@ -751,3 +751,28 @@ h1 span { color: var(--accent); }
   #tetris-board { width: min(100%, 260px); }
   .tetris-controls { width: min(100%, 260px); }
 }
+
+.key-map {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.key-map span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.key-map kbd {
+  min-width: 38px;
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-bottom-color: rgba(201, 255, 71, .45);
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}

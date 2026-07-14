@@ -10,12 +10,16 @@ test("home page exposes the professional site shell", async () => {
   assert.match(home, /<link\s+rel=["']stylesheet["']\s+href=["']styles\.css["']/i);
   assert.match(home, /<script\s+type=["']module["']\s+src=["']script\.js["']/i);
   assert.match(home, /<nav[^>]*aria-label=["']Primary["'][^>]*>/i);
+  assert.match(home, /Loop Engineering/i);
+  assert.match(home, /game in a day/i);
+  assert.match(home, /href=["']#loop-engineering["']/i);
   assert.match(home, /href=["']#about["']/i);
   assert.match(home, /href=["']#projects["']/i);
   assert.match(home, /href=["']#research["']/i);
   assert.match(home, /href=["']games\/["']/i);
   assert.match(home, /Built by Dexter/i);
   assert.match(home, /id=["']about["']/i);
+  assert.match(home, /id=["']loop-engineering["']/i);
   assert.match(home, /id=["']projects["']/i);
   assert.match(home, /id=["']research["']/i);
   assert.match(home, /id=["']contact["']/i);

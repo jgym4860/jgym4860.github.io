@@ -92,3 +92,16 @@
 - Error fingerprint: `TEST:tetris-boundary-reused-initial-state`; fixed in the test only
 - Current state: local implementation passed; browser visual/touch confirmation remains HITL_REQUIRED
 - Next loop: browser validation, then commit/push if approved
+
+
+## Change Request Loop: Loop Engineering and Tetris Mapping
+- Loop ID: `change-request-loop-engineering-002`
+- Start state: READY
+- End state: PASSED
+- Changed files: `index.html`, `games/index.html`, `styles.css`, `tests/site-shell.test.mjs`, `tests/game-page.test.mjs`, `CHANGE_REQUEST.md`
+- Verifier: `npm test`, `npm run build`, `git diff --check`
+- Result: 15 tests passed; static build passed; diff check passed
+- Retry count: 1
+- Error fingerprint: `TEST:change-request-trailing-blank-line`; corrected without changing production behavior
+- Current state: local implementation verified; browser visual and keyboard confirmation remains HITL_REQUIRED
+- Next loop: user review of the updated home screen and Games keyboard map
