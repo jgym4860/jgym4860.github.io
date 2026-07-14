@@ -63,3 +63,16 @@ Rewrite the markdown files as ASCII-only UTF-8 and rerun local verification, the
 - Retry count: 1
 - Error fingerprint: `TEST:change-request-trailing-blank-line`
 - Human check needed: browser visual and keyboard confirmation
+
+
+## Change Loop: Separate Game Tabs
+- Loop ID: `change-request-game-tabs-003`
+- Change Item: `separate internal game tabs`
+- State transition: READY -> ACTING -> VERIFYING -> PASSED
+- Hypothesis: separate tab panels plus an active-game guard will prevent both games from starting or receiving input together
+- Act: added accessible Snake/Tetris tabs, hidden inactive panel behavior, tab keyboard navigation, and cross-game pause/input guards
+- Observe: 15 tests passed, static build passed, and all three game modules passed `node --check`
+- Reason: none
+- Retry count: 0
+- Error fingerprint: none
+- Human check needed: browser tab focus and visual interaction

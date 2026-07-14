@@ -105,3 +105,16 @@
 - Error fingerprint: `TEST:change-request-trailing-blank-line`; corrected without changing production behavior
 - Current state: local implementation verified; browser visual and keyboard confirmation remains HITL_REQUIRED
 - Next loop: user review of the updated home screen and Games keyboard map
+
+
+## Change Request Loop: Separate Game Tabs
+- Loop ID: `change-request-game-tabs-003`
+- Start state: READY
+- End state: PASSED
+- Changed files: `games/index.html`, `games/tabs.js`, `games/game.js`, `games/tetris.js`, `styles.css`, `CHANGE_REQUEST.md`
+- Verifier: `npm run check`, `node --check games/game.js`, `node --check games/tetris.js`, `node --check games/tabs.js`
+- Result: 15 tests passed; static build passed; syntax checks passed
+- Retry count: 0
+- Error fingerprint: none
+- Current state: local tab implementation verified; browser tab focus and visual interaction remains HITL_REQUIRED
+- Next loop: user review, then commit/push if requested

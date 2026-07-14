@@ -29,6 +29,11 @@
     </header>
 
     <main id="content" class="game-page game-layout">
+      <div class="game-tabs" role="tablist" aria-label="Choose a game">
+        <button id="snake-tab" class="game-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="snake-panel" data-game-tab="snake">Loop Snake</button>
+        <button id="tetris-tab" class="game-tab" type="button" role="tab" aria-selected="false" aria-controls="tetris-panel" data-game-tab="tetris">Loop Tetris</button>
+      </div>
+      <div id="snake-panel" class="game-panel snake-panel" role="tabpanel" aria-labelledby="snake-tab">
       <section class="game-copy" aria-labelledby="game-title">
         <p class="eyebrow">Systems playground</p>
         <h1 id="game-title">Loop<br><span>Snake</span></h1>
@@ -54,7 +59,9 @@
           <button type="button" data-direction="right" aria-label="Move right">&rarr;</button>
         </div>
       </section>
+      </div>
 
+      <div id="tetris-panel" class="game-panel tetris-game-panel" role="tabpanel" aria-labelledby="tetris-tab" hidden>
       <section class="tetris-panel" aria-labelledby="tetris-title">
         <div class="tetris-copy">
           <p class="eyebrow">Second loop</p>
@@ -81,6 +88,7 @@
           </div>
         </div>
       </section>
+      </div>
     </main>
 
     <footer class="site-footer game-footer">
@@ -91,5 +99,6 @@
 
     <script type="module" src="./game.js"></script>
     <script type="module" src="./tetris.js"></script>
+    <script type="module" src="./tabs.js"></script>
   </body>
 </html>

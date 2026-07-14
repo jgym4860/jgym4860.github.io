@@ -38,6 +38,15 @@ if (!window.__loopSnakeInitialized) {
         timer = null;
       }
     };
+    window.__stopLoopSnake = () => {
+      stopTimer();
+      if (game.status === "running") {
+        game = { ...game, status: "paused" };
+        startButton.textContent = "Resume";
+        setStatus("Paused while another game is active.");
+        draw();
+      }
+    };
 
     const resizeCanvas = () => {
       const size = Math.max(MIN_CANVAS, Math.floor(canvas.getBoundingClientRect().width));
@@ -128,6 +137,8 @@ if (!window.__loopSnakeInitialized) {
     };
 
     const begin = () => {
+      window.__stopLoopTetris?.();
+      window.__activeGame = "snake";
       if (game.status === "over") {
         game = createGame();
       }
@@ -153,6 +164,8 @@ if (!window.__loopSnakeInitialized) {
 
     const applyDirection = (direction) => {
       if (!direction) return;
+      if (window.__activeGame && window.__activeGame !== "snake") return;
+      window.__activeGame = "snake";
       game = queueDirection(game, direction);
       if (game.status === "idle") {
         begin();
@@ -162,6 +175,8 @@ if (!window.__loopSnakeInitialized) {
     };
 
     document.addEventListener("keydown", (event) => {
+      if (event.target.closest?.(".tetris-panel")) return;
+      if (window.__activeGame && window.__activeGame !== "snake") return;
       const direction = directionFromKey(event.key);
       if (direction) {
         event.preventDefault();

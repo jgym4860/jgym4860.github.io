@@ -25,6 +25,15 @@ if (!window.__loopTetrisInitialized) {
 
     const setStatus = (message) => { status.textContent = message; };
     const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    window.__stopLoopTetris = () => {
+      stop();
+      if (game.status === "running") {
+        game = { ...game, status: "paused" };
+        startButton.textContent = "Resume";
+        setStatus("Paused while another game is active.");
+        draw();
+      }
+    };
     const interval = () => Math.max(90, 700 - (game.level - 1) * 55);
     const drawBlock = (x, y, size, color) => {
       context.fillStyle = color;
@@ -44,9 +53,11 @@ if (!window.__loopTetrisInitialized) {
     };
     const finish = () => { stop(); startButton.textContent = "Play again"; setStatus(`Game over. Score ${game.score}. Press Play again to reset.`); draw(); };
     const tick = () => { game = dropTetris(game); if (game.status === "over") finish(); else { draw(); if (timer) { stop(); timer = setInterval(tick, interval()); } } };
-    const begin = () => { if (game.status === "over") game = createTetris(); game = startTetris(game); stop(); timer = setInterval(tick, interval()); startButton.textContent = "Pause"; setStatus("Game running. Stack, clear, and repeat."); canvas.focus(); draw(); };
+    const begin = () => { window.__stopLoopSnake?.(); window.__activeGame = "tetris"; if (game.status === "over") game = createTetris(); game = startTetris(game); stop(); timer = setInterval(tick, interval()); startButton.textContent = "Pause"; setStatus("Game running. Stack, clear, and repeat."); canvas.focus(); draw(); };
     const toggle = () => { if (game.status === "running") { game = { ...game, status: "paused" }; stop(); startButton.textContent = "Resume"; setStatus("Game paused."); } else begin(); };
     const action = (name) => {
+      if (window.__activeGame && window.__activeGame !== "tetris") return;
+      window.__activeGame = "tetris";
       if (game.status === "idle" || game.status === "paused") begin();
       if (name === "left") game = moveTetris(game, -1);
       if (name === "right") game = moveTetris(game, 1);
@@ -57,6 +68,8 @@ if (!window.__loopTetrisInitialized) {
     };
 
     document.addEventListener("keydown", (event) => {
+      if (event.target.closest?.(".game-stage")) return;
+      if (window.__activeGame && window.__activeGame !== "tetris") return;
       if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") { event.preventDefault(); action("left"); }
       else if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") { event.preventDefault(); action("right"); }
       else if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") { event.preventDefault(); action("rotate"); }
