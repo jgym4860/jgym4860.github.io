@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Play Loop Snake with keyboard or touch controls.">
+    <meta name="description" content="Play Loop Snake and Loop Tetris with keyboard or touch controls.">
     <meta name="theme-color" content="#0b0d12">
     <title>Games | Professional Portfolio</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -48,10 +48,36 @@
       <section class="game-stage" aria-label="Loop Snake game">
         <canvas id="game-board" width="640" height="640" tabindex="0" role="img" aria-label="Snake game board. Use arrow keys, WASD, swipe, or direction buttons to move."></canvas>
         <div class="touch-controls" aria-label="Touch direction controls">
-          <button type="button" data-direction="up" aria-label="Move up">↑</button>
-          <button type="button" data-direction="left" aria-label="Move left">←</button>
-          <button type="button" data-direction="down" aria-label="Move down">↓</button>
-          <button type="button" data-direction="right" aria-label="Move right">→</button>
+          <button type="button" data-direction="up" aria-label="Move up">&uarr;</button>
+          <button type="button" data-direction="left" aria-label="Move left">&larr;</button>
+          <button type="button" data-direction="down" aria-label="Move down">&darr;</button>
+          <button type="button" data-direction="right" aria-label="Move right">&rarr;</button>
+        </div>
+      </section>
+
+      <section class="tetris-panel" aria-labelledby="tetris-title">
+        <div class="tetris-copy">
+          <p class="eyebrow">Second loop</p>
+          <h2 id="tetris-title">Loop <span>Tetris</span></h2>
+          <p>Stack falling blocks, clear lines, and keep the board open. The same small-loop mindset, in a different shape.</p>
+          <div class="score-panel" aria-label="Tetris score">
+            <div><span>Score</span><strong id="tetris-score">00</strong></div>
+            <div><span>Lines</span><strong id="tetris-lines">00</strong></div>
+            <div><span>Level</span><strong id="tetris-level">01</strong></div>
+          </div>
+          <button class="button button-primary" id="start-tetris" type="button">Start Tetris</button>
+          <p class="game-help"><strong>Keyboard:</strong> Arrow keys, A/D, W rotate, S drop, Space hard drop<br><strong>Touch:</strong> Use the controls below</p>
+          <p id="tetris-status" class="game-status" aria-live="polite">Ready. Press Start Tetris or a control to begin.</p>
+        </div>
+        <div class="tetris-stage" aria-label="Loop Tetris game">
+          <canvas id="tetris-board" width="300" height="600" tabindex="0" role="img" aria-label="Tetris game board. Use arrow keys or the touch controls to move pieces."></canvas>
+          <div class="tetris-controls" aria-label="Tetris touch controls">
+            <button type="button" data-tetris-action="left" aria-label="Move piece left">&larr;</button>
+            <button type="button" data-tetris-action="rotate" aria-label="Rotate piece">&#8635;</button>
+            <button type="button" data-tetris-action="right" aria-label="Move piece right">&rarr;</button>
+            <button type="button" data-tetris-action="down" aria-label="Soft drop piece">&darr;</button>
+            <button type="button" data-tetris-action="hard-drop" aria-label="Hard drop piece">Drop</button>
+          </div>
         </div>
       </section>
     </main>
@@ -63,5 +89,6 @@
     </footer>
 
     <script type="module" src="./game.js"></script>
+    <script type="module" src="./tetris.js"></script>
   </body>
 </html>

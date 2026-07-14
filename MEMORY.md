@@ -78,3 +78,17 @@
 - Next Loop: deploy approval or the next user request
 - Current normal commit candidate: `78286240819d3b9fcf0e73f59f963e9320c8e13f`
 - Rollback ±‚¡ÿ: revert only the six changed files from this loop if needed
+
+
+## Tetris Change Loop
+- Loop ID: `change-request-tetris-001`
+- Start state: READY
+- End state: PASSED
+- Goal: add Tetris to the existing Games page while preserving Snake
+- Changed files: `games/index.html`, `games/tetris.js`, `assets/tetris-core.js`, `styles.css`, `tests/game-page.test.mjs`, `tests/tetris-core.test.mjs`
+- Verifier: `npm test`, `npm run build`, local `python3 -m http.server`
+- Result: 15 tests passed; static build passed; local HTTP checks returned 200 for the main page, Games page, and Tetris modules
+- Retry count: 1
+- Error fingerprint: `TEST:tetris-boundary-reused-initial-state`; fixed in the test only
+- Current state: local implementation passed; browser visual/touch confirmation remains HITL_REQUIRED
+- Next loop: browser validation, then commit/push if approved
