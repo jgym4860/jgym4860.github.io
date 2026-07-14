@@ -1,17 +1,19 @@
-﻿import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
 
-test('games page exposes accessible snake controls', async () => {
-  const page = await readFile(new URL('../games/index.html', import.meta.url), 'utf8');
+test("games page exposes accessible snake controls", async () => {
+  const page = await readFile(new URL("../games/index.html", import.meta.url), "utf8");
 
+  assert.match(page, /<link\s+rel=["']icon["']\s+href=["']\.\.\/favicon\.svg["']\s+type=["']image\/svg\+xml["']/i);
   assert.match(page, /<canvas[^>]+id=["']game-board["'][^>]+aria-label=/i);
   assert.match(page, /id=["']game-status["'][^>]+aria-live=["']polite["']/i);
   assert.match(page, /<button[^>]+id=["']start-game["']/i);
-  for (const direction of ['up', 'right', 'down', 'left']) {
-    assert.match(page, new RegExp(`data-direction=["']${direction}["']`, 'i'));
+  for (const direction of ["up", "right", "down", "left"]) {
+    assert.match(page, new RegExp(`data-direction=["']${direction}["']`, "i"));
   }
   assert.match(page, /Keyboard:<\/strong>\s*Arrow keys or WASD/i);
   assert.match(page, /Touch:<\/strong>\s*Swipe the board or use the controls/i);
+  assert.match(page, /Built by Dexter/i);
   assert.match(page, /<script\s+type=["']module["']\s+src=["']\.\/game\.js["']/i);
 });

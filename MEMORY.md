@@ -62,3 +62,19 @@
 
 ## Execution Note
 - The markdown encoding issue was the last known GitHub Pages failure source.
+## Change Request Loop
+- Loop ID: `change-request-favicon-dexter-001`
+- Change Item ID: `favicon 추가`, `Page 내용`
+- Start state: READY
+- End state: PASSED
+- Hypothesis: adding a shared favicon and a visible Dexter credit on the home and games pages will satisfy the request without disturbing existing behavior
+- Act: added `favicon.svg`, updated `index.html` and `games/index.html`, added minimal styling in `styles.css`, and extended the local verifier tests
+- Changed files: `index.html`, `games/index.html`, `styles.css`, `tests/site-shell.test.mjs`, `tests/game-page.test.mjs`, `favicon.svg`
+- Verifier: `npm test`, `npm run build`
+- Result: both verifiers passed
+- Exit code: 0
+- Error fingerprint: none
+- Retry count: 0
+- Next Loop: deploy approval or the next user request
+- Current normal commit candidate: `78286240819d3b9fcf0e73f59f963e9320c8e13f`
+- Rollback 기준: revert only the six changed files from this loop if needed
