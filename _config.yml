@@ -1,0 +1,4 @@
+exclude:
+  - AORR.md
+  - MEMORY.md
+  - CHANGE_REQUEST.md
